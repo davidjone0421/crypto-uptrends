@@ -2,6 +2,7 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { fetchArticlesByCategory, type Article } from "@/lib/articles";
 import { ArticleCard } from "@/components/ArticleCard";
 import { AdSlot } from "@/components/AdSlot";
+import { FearGreedWidget } from "@/components/FearGreedWidget";
 
 export const Route = createFileRoute("/category/$slug")({
   loader: async ({ params }) => {
@@ -65,17 +66,15 @@ function CategoryPage() {
       ) : (
         <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px]">
           <div className="grid gap-5 sm:grid-cols-2">
-            {(articles as Article[]).map((a: Article, i: number) => (
-              <div key={a.id} className={i === 3 ? "sm:col-span-2 contents" : "contents"}>
-                <ArticleCard article={a} />
-                {i === 3 && (
-                  <AdSlot variant="in-article" className="sm:col-span-2" />
-                )}
-              </div>
+            {(articles as Article[]).map((a: Article) => (
+              <ArticleCard key={a.id} article={a} />
             ))}
           </div>
-          <aside className="hidden lg:block">
-            <AdSlot variant="sidebar" />
+          <aside className="space-y-6">
+            <FearGreedWidget />
+            <div className="hidden lg:block">
+              <AdSlot variant="sidebar" />
+            </div>
           </aside>
         </div>
       )}

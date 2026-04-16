@@ -43,6 +43,8 @@
   --color-surface-elevated: var(--surface-elevated);
   --color-ad-bg: var(--ad-bg);
   --color-ad-border: var(--ad-border);
+
+  --animate-ticker: ticker 60s linear infinite;
 }
 
 :root {
@@ -136,4 +138,9 @@
     color: white;
     border-radius: 0.25rem;
   }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
