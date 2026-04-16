@@ -14,7 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      articles: {
+        Row: {
+          author: string
+          category_id: string | null
+          content: string
+          cover_image: string
+          created_at: string | null
+          excerpt: string
+          id: string
+          is_featured: boolean
+          published_at: string
+          read_minutes: number
+          slug: string
+          title: string
+        }
+        Insert: {
+          author?: string
+          category_id?: string | null
+          content: string
+          cover_image: string
+          created_at?: string | null
+          excerpt: string
+          id?: string
+          is_featured?: boolean
+          published_at?: string
+          read_minutes?: number
+          slug: string
+          title: string
+        }
+        Update: {
+          author?: string
+          category_id?: string | null
+          content?: string
+          cover_image?: string
+          created_at?: string | null
+          excerpt?: string
+          id?: string
+          is_featured?: boolean
+          published_at?: string
+          read_minutes?: number
+          slug?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "articles_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      categories: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
