@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PriceTicker } from "@/components/PriceTicker";
 import { NewsletterPopup } from "@/components/NewsletterPopup";
+import { AuthProvider } from "@/lib/auth";
 import appCss from "../styles.css?url";
 
 const SITE_URL = "https://cryptouptrend.com";
@@ -16,13 +17,7 @@ function NotFoundComponent() {
         <div className="max-w-md text-center">
           <p className="font-display text-7xl font-bold text-gradient-brand">404</p>
           <h1 className="mt-4 font-display text-2xl font-bold">Page not found</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            That story has wandered off the chain. Try the homepage.
-          </p>
-          <Link
-            to="/"
-            className="mt-6 inline-flex items-center justify-center rounded-md bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground"
-          >
+          <Link to="/" className="mt-6 inline-flex items-center justify-center rounded-md bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground">
             Back to home
           </Link>
         </div>
@@ -38,11 +33,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "CryptoUptrend — Cryptocurrency News, Markets & Web3 Insights" },
-      {
-        name: "description",
-        content:
-          "CryptoUptrend delivers daily cryptocurrency news, Bitcoin and altcoin market analysis, AI & Web3 coverage, and expert price predictions.",
-      },
+      { name: "description", content: "CryptoUptrend delivers daily cryptocurrency news, Bitcoin and altcoin market analysis, AI & Web3 coverage, and expert price predictions." },
       { name: "author", content: "CryptoUptrend" },
       { name: "theme-color", content: "#000000" },
       { property: "og:site_name", content: "CryptoUptrend" },
@@ -58,10 +49,7 @@ export const Route = createRootRoute({
       { rel: "alternate", type: "application/rss+xml", title: "CryptoUptrend RSS Feed", href: "/rss.xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap",
-      },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -72,27 +60,22 @@ export const Route = createRootRoute({
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
+      <head><HeadContent /></head>
+      <body>{children}<Scripts /></body>
     </html>
   );
 }
 
 function RootComponent() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <PriceTicker />
-      <Header />
-      <main className="flex-1">
-        <Outlet />
-      </main>
-      <Footer />
-      <NewsletterPopup />
-    </div>
+    <AuthProvider>
+      <div className="flex min-h-screen flex-col">
+        <PriceTicker />
+        <Header />
+        <main className="flex-1"><Outlet /></main>
+        <Footer />
+        <NewsletterPopup />
+      </div>
+    </AuthProvider>
   );
 }
