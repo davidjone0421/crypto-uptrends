@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { fetchArticles, type Article } from "@/lib/articles";
 import { ArticleCard } from "@/components/ArticleCard";
 import { AdSlot } from "@/components/AdSlot";
+import { FearGreedWidget } from "@/components/FearGreedWidget";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -50,7 +51,10 @@ function HomePage() {
   if (!hero) {
     return (
       <div className="mx-auto max-w-3xl p-12 text-center text-muted-foreground">
-        No articles yet.
+        <p>No articles yet.</p>
+        <Link to="/admin" className="mt-4 inline-block text-brand hover:underline">
+          Go to Admin →
+        </Link>
       </div>
     );
   }
@@ -93,7 +97,8 @@ function HomePage() {
           </div>
         </div>
 
-        <aside className="space-y-8">
+        <aside className="space-y-6">
+          <FearGreedWidget />
           <div className="rounded-lg border border-border bg-[var(--surface)] p-4">
             <SectionHeading title="Trending Now" small />
             <div className="mt-4 space-y-2">
