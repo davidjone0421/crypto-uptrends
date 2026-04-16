@@ -1,6 +1,8 @@
 import { Outlet, createRootRoute, HeadContent, Scripts, Link } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PriceTicker } from "@/components/PriceTicker";
+import { NewsletterPopup } from "@/components/NewsletterPopup";
 import appCss from "../styles.css?url";
 
 const SITE_URL = "https://cryptouptrend.com";
@@ -8,6 +10,7 @@ const SITE_URL = "https://cryptouptrend.com";
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen flex-col">
+      <PriceTicker />
       <Header />
       <main className="flex flex-1 items-center justify-center px-4 py-20">
         <div className="max-w-md text-center">
@@ -41,7 +44,7 @@ export const Route = createRootRoute({
           "CryptoUptrend delivers daily cryptocurrency news, Bitcoin and altcoin market analysis, AI & Web3 coverage, and expert price predictions.",
       },
       { name: "author", content: "CryptoUptrend" },
-      { name: "theme-color", content: "#0a1226" },
+      { name: "theme-color", content: "#000000" },
       { property: "og:site_name", content: "CryptoUptrend" },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },
@@ -52,6 +55,7 @@ export const Route = createRootRoute({
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
+      { rel: "alternate", type: "application/rss+xml", title: "CryptoUptrend RSS Feed", href: "/rss.xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -82,11 +86,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <div className="flex min-h-screen flex-col">
+      <PriceTicker />
       <Header />
       <main className="flex-1">
         <Outlet />
       </main>
       <Footer />
+      <NewsletterPopup />
     </div>
   );
 }

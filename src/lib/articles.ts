@@ -12,7 +12,12 @@ export type Article = {
   is_featured: boolean;
   published_at: string;
   category_id: string | null;
+  subcategory_id: string | null;
+  author_id: string | null;
+  disclaimer: string | null;
   category?: Category | null;
+  subcategory?: Subcategory | null;
+  author_profile?: Author | null;
 };
 
 export type Category = {
@@ -22,10 +27,29 @@ export type Category = {
   description: string | null;
 };
 
+export type Subcategory = {
+  id: string;
+  slug: string;
+  name: string;
+  category_id: string;
+};
+
+export type Author = {
+  id: string;
+  slug: string;
+  name: string;
+  title: string | null;
+  bio: string | null;
+  avatar_url: string | null;
+  twitter_handle: string | null;
+};
+
 const ARTICLE_SELECT = `
   id, slug, title, excerpt, content, cover_image, author, read_minutes,
-  is_featured, published_at, category_id,
-  category:categories(id, slug, name, description)
+  is_featured, published_at, category_id, subcategory_id, author_id, disclaimer,
+  category:categories(id, slug, name, description),
+  subcategory:subcategories(id, slug, name, category_id),
+  author_profile:authors(id, slug, name, title, bio, avatar_url, twitter_handle)
 `;
 
 export async function fetchArticles(limit = 50): Promise<Article[]> {
@@ -77,6 +101,24 @@ export async function fetchCategories(): Promise<Category[]> {
     .order("name");
   if (error) throw error;
   return (data ?? []) as Category[];
+}
+
+export async function fetchSubcategories(): Promise<Subcategory[]> {
+  const { data, error } = await supabase
+    .from("subcategories")
+    .select("id, slug, name, category_id")
+    .order("name");
+  if (error) throw error;
+  return (data ?? []) as Subcategory[];
+}
+
+export async function fetchAuthors(): Promise<Author[]> {
+  const { data, error } = await supabase
+    .from("authors")
+    .select("id, slug, name, title, bio, avatar_url, twitter_handle")
+    .order("name");
+  if (error) throw error;
+  return (data ?? []) as Author[];
 }
 
 export function formatDate(iso: string): string {
