@@ -115,7 +115,7 @@ function ArticlePage() {
       </figure>
 
       <div className="prose-article space-y-5 text-base leading-relaxed text-foreground/90">
-        {paragraphs.map((p, i) => (
+        {paragraphs.map((p: string, i: number) => (
           <div key={i}>
             <p>{p}</p>
             {i === mid && <AdSlot variant="in-article" />}

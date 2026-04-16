@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { fetchArticles } from "@/lib/articles";
+import { fetchArticles, type Article } from "@/lib/articles";
 import { ArticleCard } from "@/components/ArticleCard";
 import { AdSlot } from "@/components/AdSlot";
 
@@ -40,11 +40,11 @@ function HomeSkeleton() {
 }
 
 function HomePage() {
-  const articles = Route.useLoaderData();
-  const featured = articles.filter((a) => a.is_featured);
+  const articles = Route.useLoaderData() as Article[];
+  const featured = articles.filter((a: Article) => a.is_featured);
   const hero = featured[0] ?? articles[0];
   const sideFeatured = featured.slice(1, 3);
-  const grid = articles.filter((a) => a.id !== hero?.id).slice(0, 8);
+  const grid = articles.filter((a: Article) => a.id !== hero?.id).slice(0, 8);
   const sidebar = articles.slice(0, 5);
 
   if (!hero) {
