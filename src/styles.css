@@ -83,6 +83,13 @@
   --ad-bg: oklch(0.2 0.02 260 / 60%);
   --ad-border: oklch(1 0 0 / 10%);
 
+  /* Teal footer palette (cryptoupturn.com) */
+  --footer-bg: oklch(0.32 0.045 195);
+  --footer-bg-deep: oklch(0.22 0.04 200);
+  --footer-fg: oklch(0.97 0.01 195);
+  --footer-muted: oklch(0.78 0.03 195);
+  --footer-border: oklch(1 0 0 / 12%);
+
   --shadow-card: 0 4px 20px -8px oklch(0 0 0 / 50%);
   --shadow-glow: 0 0 40px -10px oklch(0.68 0.19 240 / 40%);
   --gradient-brand: linear-gradient(135deg, var(--brand), var(--brand-glow));
