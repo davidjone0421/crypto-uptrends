@@ -61,7 +61,6 @@ function HomePage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 md:px-6">
-      <AdSlot variant="leaderboard" className="hidden md:flex" />
       <AdSlot variant="mobile-banner" />
 
       {/* Hero grid */}
