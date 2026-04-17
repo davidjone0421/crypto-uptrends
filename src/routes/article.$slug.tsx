@@ -85,7 +85,6 @@ function ArticlePage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
-      <AdSlot variant="leaderboard" className="hidden md:flex" />
       <AdSlot variant="mobile-banner" />
 
       <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
