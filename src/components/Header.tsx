@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import logo from "@/assets/logo-mark.svg";
+import { AdSlot } from "@/components/AdSlot";
 
 type DropdownItem = { slug: string; label: string };
 type NavItem = {
@@ -44,29 +45,37 @@ export function Header() {
   const [search, setSearch] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-black text-white shadow-md">
-      {/* Top brand strip */}
-      <div className="border-b border-white/10">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
+    <header className="sticky top-0 z-50 shadow-md">
+      {/* White brand strip with wordmark */}
+      <div className="bg-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6 md:py-5">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={logo} alt="" className="h-8 w-8" width={32} height={32} />
-            <span className="font-display text-xl font-bold tracking-tight text-white">
-              Crypto<span className="text-[#0088FF]">Uptrend</span>
+            <img src={logo} alt="" className="h-9 w-9 md:h-10 md:w-10" width={40} height={40} />
+            <span
+              className="font-display text-2xl font-extrabold tracking-tight text-black md:text-3xl"
+              style={{ letterSpacing: "-0.02em" }}
+            >
+              Cryptoupturn
             </span>
           </Link>
 
           <button
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-md text-white/70 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-black/70 transition-colors hover:bg-black/10 hover:text-black lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
+      {/* Leaderboard ad above the black nav (Cointraffic-style 728x90) */}
+      <div className="bg-white pb-3">
+        <AdSlot variant="leaderboard" className="my-0" label="Advertisement · 728×90 — Cointraffic" />
+      </div>
+
       {/* Black nav bar with blue active blocks */}
-      <nav className="hidden lg:block">
+      <nav className="hidden bg-black text-white lg:block">
         <div className="mx-auto flex max-w-7xl items-stretch justify-between px-4 md:px-6">
           <ul className="flex items-stretch">
             {NAV.map((item) => (
@@ -99,7 +108,7 @@ export function Header() {
 
       {/* Mobile drawer */}
       {open && (
-        <nav className="border-t border-white/10 bg-black lg:hidden">
+        <nav className="bg-black lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col px-4 py-2">
             {NAV.map((item) => (
               <MobileNavItem key={item.label} item={item} onClose={() => setOpen(false)} />
